@@ -45,23 +45,30 @@ jobs:
     # This step installs dependencies
     # TODO: Replace the run block, using `uv` to sync the environment
     - name: Install  existing dependencies
-      run: uv sync
+      run: |
+        uv sync
 
     - name: Install  ruff
-      run: uv add --dev ruff
+      run: |
+        uv add --dev ruff
 
     - name: Test with pytest
-      run: uv run python -m pytest
+      run: |
+        uv run python -m pytest
         
     - name: Lint with ruff
-      run: uvx ruff check
+      run: | 
+        uvx ruff check
 
 
     - name: Format with ruff
-      run: uvx ruff format --check
+      run: | 
+        uvx ruff format --check
 
     - name: Sort imports
-      run: uvx isort. --check
+      run: |
+        uvx isort. --check
 
     - name: Type checking
-      run: uvx ty check
+      run: | 
+        uvx ty check

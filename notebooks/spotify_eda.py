@@ -367,31 +367,34 @@ def _():
 
 
 @app.function
-def get_extremes(selection, col, defaults_if_missing):
+def get_extremes(
+    selection: list[dict[str, float]] | None,
+    col: str,
+    defaults_if_missing: tuple[int, int],
+) -> tuple[int | float, int | float]:
     """
     Extract the minimum and maximum values from a specific column in a selection.
 
-    This function processes a list of rows (selection) and extracts the minimum and maximum
-    values from a specified column index. If the selection is empty or None, it returns
+    This function processes a list of selected rows and extracts the minimum and maximum
+    values for a specified column key. If the selection is empty or None, it returns
     default values and prints a warning message.
 
     Args:
-        selection (list): A list of rows where each row is indexable (e.g., list, tuple).
-                         Can be None or empty.
-        col (int): The column index to extract values from in each row.
+        selection (list[dict[str, float]] | None): Selected rows, or None if there is no selection.
+        col (str): The column key to extract values from in each row.
         defaults_if_missing (tuple[int, int]): A tuple containing (min_default, max_default)
                                               to return when selection is invalid.
 
     Returns:
-        tuple[int, int]: A tuple containing (minimum_value, maximum_value) from the specified
-                        column, or the default values if the selection is invalid.
+        tuple[int | float, int | float]: The minimum and maximum values from the specified
+                                        column, or the default values if the selection is invalid.
 
     Example:
-        >>> data = [[1, 10, 100], [2, 20, 200], [3, 30, 300]]
-        >>> get_extremes(data, 1, (0, 0))
-        (10, 30)
+        >>> data = [{"x": 10.0}, {"x": 30.0}]
+        >>> get_extremes(data, "x", (0, 0))
+        (10.0, 30.0)
 
-        >>> get_extremes([], 0, (5, 10))
+        >>> get_extremes([], "x", (5, 10))
         Could not find a selected region. Using default values (5, 10) instead...
         (5, 10)
     """

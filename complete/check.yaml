@@ -1,0 +1,68 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: Checks
+
+# This defines the triggers for the workflow
+# i.e. when the workflow will run
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    # This defines the type of machine to run the job on
+    runs-on: ubuntu-latest
+
+    steps:
+
+    # This step copies your repository code to the runner
+    - uses: actions/checkout@v7
+
+    # This step sets up Python on the runner
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v7
+      with:
+        python-version: "3.12"
+
+    # This step installs uv
+    - name: Install the latest version of uv
+      uses: astral-sh/setup-uv@v10.3.3
+
+    # The next steps use *run* to execute commands on the runner
+    # This is just like typing commands in the Codespace terminal
+
+    # This step installs dependencies
+    - name: Install dependencies
+      run: |
+        uv sync
+
+    # This step runs unit tests with pytest
+    # (we need -m so that our tests can find our notebook code)
+    - name: Test with pytest
+      run: |
+        uv run python -m pytest
+
+    # This step runs the linter against the codebase
+    - name: Lint with ruff
+      run: |
+        uvx ruff check
+
+    # The next steps only check. Without --check they would change the files on the runner and always pass
+    - name: Check formatting with ruff
+      run: |
+        uvx ruff format --check
+
+    - name: Type check with ty
+      run: |
+        uvx ty check
+
+    - name: Check import order with isort
+      run: |
+        uvx isort . --check

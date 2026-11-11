@@ -1,0 +1,25 @@
+[project]
+name = "ci-with-spotify"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=2.5.4",
+    "plotly[express]>=7.1.0",
+    "polars>=2.1.0",
+    "statsmodels>=0.15.0",
+]
+
+[dependency-groups]
+dev = [
+    "marimo>=0.25.2",
+    "pytest>=9.2.0",
+]
+
+[tool.ruff.lint]
+# Ruff's default rules flag two things that marimo writes on purpose: the bare
+# `return` at the end of a cell (PLR1711) and a cell's last line, which marimo
+# displays (B018). We sort imports with isort, which wraps long imports differently
+# from ruff, so ruff's own import sorting check (I001) is switched off too.
+ignore = ["PLR1711", "B018", "I001"]

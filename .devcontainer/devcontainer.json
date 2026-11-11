@@ -1,0 +1,28 @@
+{
+    "name": "Python with uv",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python"
+            ],
+            "settings": {
+                "markdown.preview.security.level": "allow-insecure-local-content",
+                "extensions.ignoreRecommendations": true,
+                "chat.disableAIFeatures": true,
+                "git.addAICoAuthor": "chatAndAgent",
+                "workbench.secondarySideBar.defaultVisibility": "hidden",
+                "python.defaultInterpreterPath": "/usr/local/python/current/bin/python",
+                "git.enableSmartCommit": true,
+                "git.confirmSync": false,
+                "git.postCommitCommand": "sync",
+                "git.autofetch": true,
+                "git.useEditorAsCommitInput": false,
+                "git.rebaseWhenSync": true,
+                "githubPullRequests.createOnPublishBranch": "never",
+                "terminal.integrated.ignoreProcessKeybindingWarnings": true
+            }
+        }
+    },
+    "postCreateCommand": "curl -LsSf https://astral.sh/uv/install.sh | sh",
+    "postStartCommand": "uv sync"
+}

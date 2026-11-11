@@ -72,5 +72,5 @@ jobs:
 
     # TODO: Add steps to run formatting steps and type checking
     - name: Format with ruff
-    run: | 
-      uvx ruff format
+      run: | 
+        uvx ruff format

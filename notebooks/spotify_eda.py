@@ -50,7 +50,7 @@ def _(lz):
     df = (
         lz
         # Filter data we consider relevant (somewhat arbitrary in this example)
-        .filter(pl.col("explicit") == False)  # noqa
+        .filter(pl.col("explicit") == False)
         .drop("Unnamed: 0", "track_id", "explicit")
         .with_columns(
             # Perform whichever transformations you want  (again somewhat arbitrary in this example)

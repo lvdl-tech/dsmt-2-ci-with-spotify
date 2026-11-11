@@ -390,7 +390,7 @@ def get_extremes(selection, col, defaults_if_missing):
         >>> data = [[1, 10, 100], [2, 20, 200], [3, 30, 300]]
         >>> get_extremes(data, 1, (0, 0))
         (10, 30)
-        
+
         >>> get_extremes([], 0, (5, 10))
         Could not find a selected region. Using default values (5, 10) instead...
         (5, 10)
